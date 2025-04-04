@@ -17,6 +17,7 @@ print("Số lượng ảnh mỗi lớp:\n", class_counts)
 
 # Định nghĩa Data Augmentation
 augment_transform = transforms.Compose([
+    transforms.Resize((1024, 1024), interpolation=transforms.InterpolationMode.LANCZOS),
     transforms.RandomHorizontalFlip(),
     transforms.RandomRotation(15),
     transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
@@ -36,7 +37,7 @@ for class_label, count in class_counts.items():
 
         for i in range(num_augment):
             img_path = class_images[i % len(class_images)]  # Lặp lại nếu số ảnh ít hơn cần augment
-            img_path = os.path.join("data/images/", img_path)
+            img_path = os.path.join("data/images_with_background", img_path)
             image = read_image(img_path)  # Đọc ảnh thành tensor (uint8)
             
             # Chuyển tensor thành PIL Image
@@ -47,7 +48,7 @@ for class_label, count in class_counts.items():
             
             # Tạo tên ảnh mới
             new_img_name = f"{os.path.basename(img_path).split('.')[0]}_aug{i}.jpg"
-            save_path = f"data/train_augmented/{new_img_name}"
+            save_path = f"data/train_augmented_with_background/{new_img_name}"
             os.makedirs(os.path.dirname(save_path), exist_ok=True)  # Tạo thư mục nếu chưa có
             save_image(augmented_img, save_path)
 

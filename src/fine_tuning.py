@@ -20,8 +20,8 @@ args = parser.parse_args()
 # Cấu hình từ argparse
 TRAIN_CSV_PATH = "data/train_balanced.csv"
 VAL_CSV_PATH = "data/val.csv"
-IMG_DIR = "data/images/"
-IMG_DIR_AUG = "data/train_augmented/"
+IMG_DIR = "data/images_with_background/"
+IMG_DIR_AUG = "data/train_augmented_with_background/"
 EPOCHS = args.epochs
 BATCH_SIZE = args.batch_size
 LEARNING_RATE = args.lr
